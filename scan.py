@@ -47,7 +47,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 							subdominios_paraostestes1.append(diretorio.replace("\n",""))
 					count1.close()
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(subdominios_paraostestes1)))
 
@@ -132,7 +132,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
 							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("sublinks","subdomínios")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1m(\033[m\033[1;31mdemorar\033[m\033[1m)\033[m\033[1m:\033[m")
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes)))
