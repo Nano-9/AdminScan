@@ -189,8 +189,8 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 		print("Não se esqueça de colocar a url com o protocolo\n\n")
 
 		print("\033[1;33m\n------------ LINHAS DE COMANDOS ------------\033[m\n\n")
-		print("{} --site http://bancocn.com/ --tipo admin".format(sys.argv[0]))
-		print("{} --site http://bancocn.com/ --tipo sublinks\n".format(sys.argv[0]))
+		print("python {} --site http://bancocn.com/ --tipo admin".format(sys.argv[0]))
+		print("python {} --site http://bancocn.com/ --tipo sublinks\n".format(sys.argv[0]))
 
 		print("\033[1;32m\n\n------------ TIPOS DE COMANDOS DISPONÍVEIS ------------\033[m\n\n")
 		print("\n{} --help  :  Usado para chamar o painel de ajuda!".format(sys.argv[0]))
