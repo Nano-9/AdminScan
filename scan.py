@@ -72,6 +72,8 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 									continue
 								except requests.exceptions.TooManyRedirects:
 									continue
+								except requests.exceptions.ReadTimeout:
+									continue
 								else:
 									if conectar_site.status_code == 200:
 										subdominios_encontrados1.append(teste)
@@ -161,6 +163,8 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.TooManyRedirects:
+									continue
+								except requests.exceptions.ReadTimeout:
 									continue
 								else:
 									if conectar_site2.status_code == 200:
