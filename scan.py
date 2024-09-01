@@ -47,7 +47,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 							subdominios_paraostestes1.append(diretorio.replace("\n",""))
 					count1.close()
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(subdominios_paraostestes1)))
 
@@ -132,7 +132,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
 							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado as:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("sublinks","subdomínios")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1m(\033[m\033[1;31mdemorar\033[m\033[1m)\033[m\033[1m:\033[m")
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes)))
@@ -179,7 +179,9 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 					except KeyboardInterrupt:
 						print("[+] Saindo...")
 						raise SystemExit
-
+		else:
+			BanerAdm()
+			print("Verifique a url digitada, protocolo (http ou https) e no final da url adicione uma /")
 	elif "--help" in ENTER_USER[1]:
 		BanerAdm()
 		print("\033[1;36m\n\n#############\033[m \033[1mBEM VINDO AO MENU DE HELP\033[m \033[1;36m#############\033[m")
@@ -189,8 +191,8 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 		print("Não se esqueça de colocar a url com o protocolo\n\n")
 
 		print("\033[1;33m\n------------ LINHAS DE COMANDOS ------------\033[m\n\n")
-		print("python {} --site http://bancocn.com/ --tipo admin".format(sys.argv[0]))
-		print("python {} --site http://bancocn.com/ --tipo sublinks\n".format(sys.argv[0]))
+		print("{} --site http://bancocn.com/ --tipo admin".format(sys.argv[0]))
+		print("{} --site http://bancocn.com/ --tipo sublinks\n".format(sys.argv[0]))
 
 		print("\033[1;32m\n\n------------ TIPOS DE COMANDOS DISPONÍVEIS ------------\033[m\n\n")
 		print("\n{} --help  :  Usado para chamar o painel de ajuda!".format(sys.argv[0]))
