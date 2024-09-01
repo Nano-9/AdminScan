@@ -181,7 +181,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 						raise SystemExit
 		else:
 			BanerAdm()
-			print("Verifique a url digitada, protocolo (http ou https) e no final da url adicione uma /")
+			print("\nVerifique a url digitada, protocolo (http ou https) e no final da url adicione uma /\n")
 	elif "--help" in ENTER_USER[1]:
 		BanerAdm()
 		print("\033[1;36m\n\n#############\033[m \033[1mBEM VINDO AO MENU DE HELP\033[m \033[1;36m#############\033[m")
