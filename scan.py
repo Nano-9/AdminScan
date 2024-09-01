@@ -30,6 +30,9 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 					info = SESSIONS.get(sys.argv[2],timeout=5,verify=True,headers=way.headers)
 					if info.status_code == 200:
 						try:
+							subdominios_paraostestes1 = []
+							subdominios_encontrados1 = []
+							subdominios_deletados1 = []
 							tecnologia = info.headers["X-Powered-By"]
 							servidor_web = info.headers["server"]
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
@@ -39,17 +42,17 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
 							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
 
-					wordlist_size = open("admin.txt","rt")
+					with open("admin.txt","rt") as count1:
+						for diretorio in count1:
+							subdominios_paraostestes1.append(diretorio.replace("\n",""))
+					count1.close()
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4]))
-					if sys.platform == "linux":
-						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(wordlist_size.readlines())))
-					else:
-						print()
-
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(subdominios_paraostestes1)))
 
 					try:
+						print("\n\033[1;36m>>>>>\033[m \033[1mBUSCANDO PÁGINAS E DIRETÓRIOS\033[m \033[1;36m<<<<<\033[m\n\n")
 						with open("admin.txt","rt") as admin_search:
 							for num,adm in enumerate(admin_search):
 								try:
@@ -59,13 +62,19 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 									print("\n[*] Saindo...")
 									raise SystemExit
 								except requests.exceptions.ConnectionError:
+									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.SSLError:
+									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.InvalidURL:
+									subdominios_deletados1.append(teste)
+									continue
+								except requests.exceptions.TooManyRedirects:
 									continue
 								else:
 									if conectar_site.status_code == 200:
+										subdominios_encontrados1.append(teste)
 										if teste.endswith(".php"):
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mArquivo php:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
 										elif teste.endswith(".txt"):
@@ -88,17 +97,30 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 												save2.write("Admin Page: {}\n".format(teste))
 												save2.write("--------------------------------------\n\n")
 												save2.close()
-									elif conectar_site.status_code == 404:
-										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTesting:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
-									elif conectar_site.status_code == 403:
-										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;33m{}\033[m\033[1m]\033[m \033[1;33mTesting:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
+									else:
+										subdominios_deletados1.append(teste)
+						admin_search.close()
+						print("\n\n\033[1m >>>>>>\033[m \033[1;32mDETALHES DOS TESTES\033[m \033[1m<<<<<<\033[m\n")
+						print("\033[1mSubdomínios testados:\033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Subdomínios encontrados:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Subdomínios descartados:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes1),len(subdominios_encontrados1),len(subdominios_deletados1)))
 					except:
 						pass
 
 				elif tipo_busca == "sublinks":
-					BanerAdm()
+					subdominios_paraostestes = []
+					subdominios_encontrados = []
+					subdominios_deletados = []
 					diretorio_save2 = sys.argv[2].split("/")
 					info2 = SESSIONS.get(sys.argv[2],timeout=5,verify=True,headers=way.headers)
+					try:
+						with open("Subdominios.txt","rt") as count:
+							for subs in count:
+								subdominios_paraostestes.append(subs.replace("\n",""))
+						count.close()
+					except FileNotFoundError:
+						BanerAdm()
+						print("\033[1m[\033[m\033[1;31m!\033[m\033[1m]\033[m Wordlist não encontrada!")
+						raise SystemExit
+					BanerAdm()
 					if info2.status_code == 200:
 						try:
 							tecnologias = info2.headers["X-Powered-By"]
@@ -109,20 +131,16 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 						except:
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
 							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
-					wordlist_size2 = open("Subdominios.txt","rt")
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1;31m(demorar):\033[m")
-					if sys.platform == "linux":
-						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(wordlist_size2.readlines())))
-					else:
-						print()
-
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("sublinks","subdomínios")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1m(\033[m\033[1;31mdemorar\033[m\033[1m)\033[m\033[1m:\033[m")
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes)))
 					try:
+						print("\n\033[1;36m>>>>>\033[m \033[1mBUSCANDO SUBDOMÍNIOS\033[m \033[1;36m<<<<<\033[m\n\n")
 						url1 = sys.argv[2].split("/")
-						with open("Subdominios.txt","rt") as admin_search:
-							for num2,adm2 in enumerate(admin_search):
+						with open("Subdominios.txt","rt") as admin_search2:
+							for num2,adm2 in enumerate(admin_search2):
 								try:
 									try:
 										url2 = url1[2].replace("www.","")
@@ -134,48 +152,60 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 									print("\n[*] Saindo...")
 									raise SystemExit
 								except requests.exceptions.ConnectionError:
+									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.SSLError:
+									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.InvalidURL:
+									subdominios_deletados.append(url3)
+									continue
+								except requests.exceptions.TooManyRedirects:
 									continue
 								else:
 									if conectar_site2.status_code == 200:
 										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mSubdomínio:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
-									elif conectar_site2.status_code == 401:
-										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTesting:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
-									elif conectar_site2.status_code == 403:
-										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;33m{}\033[m\033[1m]\033[m \033[1;33mTesting:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
-									elif conectar_site2.status_code == 404:
-										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTesting:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
+										subdominios_encontrados.append(url3)
+									else:
+										subdominios_deletados.append(url3)
+										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTested:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
+						admin_search2.close()
+						print("\n\n\033[1m >>>>>>\033[m \033[1;32mDETALHES DOS TESTES\033[m \033[1m<<<<<<\033[m\n")
+						print("\033[1mSubdomínios testados:\033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Subdomínios encontrados:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Subdomínios descartados:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes),len(subdominios_encontrados),len(subdominios_deletados)))
+					except FileNotFoundError:
+						BanerAdm()
+						print("\033[1m[\033[m\033[1;31m!\033[m\033[1m]\033[m Wordlist não encontrada!")
+						raise SystemExit
+					except KeyboardInterrupt:
+						print("[+] Saindo...")
+						raise SystemExit
 
-
-					except:
-						pass
-
-	elif "--help" in ENTER_USER:
+	elif "--help" in ENTER_USER[1]:
 		BanerAdm()
-		print("\n\n############# BEM VINDO AO MENU DE HELP #############")
+		print("\033[1;36m\n\n#############\033[m \033[1mBEM VINDO AO MENU DE HELP\033[m \033[1;36m#############\033[m")
 
-		print("\n\n------------ TIPOS DE URL SUPORTADAS ------------\n")
+		print("\033[1;32m\n\n------------ TIPOS DE URL SUPORTADAS ------------\033[m\n\n")
 		print("suportada as urls HTTP:// E HTTPS://")
-		print("Não se esqueça de colocar a url com o protocolo junto como abaixo")
-		print("{} --site http://bancocn.com/ --tipo admin\n".format(sys.argv[0]))
+		print("Não se esqueça de colocar a url com o protocolo\n\n")
 
-		print("\n------------ TIPOS DE COMANDOS DISPONÍVEIS ------------\n")
+		print("\033[1;33m\n------------ LINHAS DE COMANDOS ------------\033[m\n\n")
+		print("{} --site http://bancocn.com/ --tipo admin".format(sys.argv[0]))
+		print("{} --site http://bancocn.com/ --tipo sublinks\n".format(sys.argv[0]))
+
+		print("\033[1;32m\n\n------------ TIPOS DE COMANDOS DISPONÍVEIS ------------\033[m\n\n")
 		print("\n{} --help  :  Usado para chamar o painel de ajuda!".format(sys.argv[0]))
 		print("{} --site  :  Usado para especificar um site alvo!".format(sys.argv[0]))
 		print("{} --tipo  :  Usado para especificar o tipo de wordlist a ser usada!\n".format(sys.argv[0]))
 
-		print("\n------------ TIPOS DE WORDLISTS DISPONÍVEIS ------------\n")
+		print("\033[1;32m\n\n------------ TIPOS DE WORDLISTS DISPONÍVEIS ------------\033[m\n\n")
 		print("Wordlist 1 -> Usada para achar paineis de Admin")
 		print("Wordlist 2 -> Usada para achar subdomínios do site alvo\n")
 
-		print("\n------------ USANDO AS WORDLISTS DISPONÍVEIS ------------\n")
+		print("\033[1;32m\n\n------------ USANDO AS WORDLISTS DISPONÍVEIS ------------\033[m\n\n")
 		print("{} --site SITE AQUI --tipo admin :  Usado para especificar que será usada a wordlist de diretório Admin!".format(sys.argv[0]))
 		print("{} --site SITE AQUI --tipo sublinks :  Usado para especificar que será usada a wordlist de sublinks para encontrar outros domínios!\n".format(sys.argv[0]))
 
-		print("\n------------ ARMAZENAMENTO DAS SÁIDAS DO SCRIPT ------------\n")
+		print("\033[1;32m\n\n------------ ARMAZENAMENTO DAS SÁIDAS DO SCRIPT ------------\033[m\n\n")
 		print("Todas as saídas da URL de admin, serão armazenadas dentro das pastas com o nome do site que foi feito o scan!")
 		print("Sempre que o script encontrar uma página, ele cria uma pasta com o nome do site e armazena a saída dentro do arquivo Found.txt!\n\n")
 else:
