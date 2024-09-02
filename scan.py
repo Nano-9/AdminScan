@@ -16,9 +16,17 @@ from validator import way
 
 SESSIONS = requests.Session()
 ENTER_USER = sys.argv
+verbose = False
 tecnologia = []
 servidor_web = [] 
 if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
+	try:
+		if "--v" in sys.argv[5]:
+			verbose = "sim"
+		else:
+			pass
+	except IndexError:
+		pass
 
 	if "--site" in ENTER_USER:
 		validar_entrada = way.ValidEnter(msg=sys.argv[2])
@@ -44,8 +52,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
 							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
 						except:
-							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
-							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
+							pass
 
 					with open("admin.txt","rt") as count1:
 						for diretorio in count1:
@@ -54,8 +61,11 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m\n".format(len(subdominios_paraostestes1)))
-
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes1)))
+					if verbose == "sim":
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mModo verbose:\033[m \033[1;32m{}\033[m\n".format(verbose.replace("sim","True")))
+					else:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mModo verbose:\033[m \033[1;31mFalse\033[m\n")
 					try:
 						print("\n\033[1;36m>>>>>\033[m \033[1mBUSCANDO PÁGINAS E DIRETÓRIOS\033[m \033[1;36m<<<<<\033[m\n\n")
 						with open("admin.txt","rt") as admin_search:
@@ -104,8 +114,10 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 												save2.close()
 									else:
 										subdominios_deletados1.append(teste)
-										if "--v" in sys.argv[5]:
+										if "--v" in ENTER_USER:
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTested:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
+										else:
+											pass
 						admin_search.close()
 						print("\n\033[1m >>>>>>\033[m \033[1;32mDETALHES DOS TESTES\033[m \033[1m<<<<<<\033[m\n")
 						print("\033[1mSubdomínios testados:\033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Subdomínios encontrados:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Subdomínios descartados:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes1),len(subdominios_encontrados1),len(subdominios_deletados1)))
@@ -139,13 +151,16 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
 							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
 						except:
-							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
-							print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1m Nenhuma informação como servidor e tecnologia disponível!\033[m")
+							pass
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("sublinks","subdomínios")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1m(\033[m\033[1;31mdemorar\033[m\033[1m)\033[m\033[1m:\033[m")
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes)))
+					if verbose == "sim":
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mModo verbose:\033[m \033[1;32m{}\033[m\n".format(verbose.replace("sim","True")))
+					else:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mModo verbose:\033[m \033[1;31mFalse\033[m\n")
 					try:
 						print("\n\033[1;36m>>>>>\033[m \033[1mBUSCANDO SUBDOMÍNIOS\033[m \033[1;36m<<<<<\033[m\n\n")
 						url1 = sys.argv[2].split("/")
@@ -178,8 +193,10 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 										subdominios_encontrados.append(url3)
 									else:
 										subdominios_deletados.append(url3)
-										if "--v" in sys.argv[5]:
+										if verbose == "sim":
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTested:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
+										else:
+											pass
 						admin_search2.close()
 						print("\n\033[1m >>>>>>\033[m \033[1;32mDETALHES DOS TESTES\033[m \033[1m<<<<<<\033[m\n")
 						print("\033[1mSubdomínios testados:\033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Subdomínios encontrados:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Subdomínios descartados:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes),len(subdominios_encontrados),len(subdominios_deletados)))
