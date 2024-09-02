@@ -19,7 +19,6 @@ ENTER_USER = sys.argv
 verbose = False
 tecnologia = []
 servidor_web = []
-diretorio_save = sys.argv[2].split("/")
 
 if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 	try:
@@ -37,6 +36,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 			if "--tipo" in ENTER_USER:
 				tipo_busca = sys.argv[4].lower()
 				if tipo_busca == "admin":
+					diretorio_save = sys.argv[2].split("/")
 					BanerAdm()
 					info = SESSIONS.get(sys.argv[2],timeout=5,verify=True,headers=way.headers)
 					for head,dados in info.headers.items():
@@ -124,6 +124,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 						pass
 
 				elif tipo_busca == "sublinks":
+					diretorio_save = sys.argv[2].split("/")
 					subdominios_paraostestes = []
 					subdominios_encontrados = []
 					subdominios_deletados = []
@@ -259,4 +260,3 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 else:
 	BanerAdm()
 	print("\n\033[1m[\033[m\033[1;31m!\033[m\033[1m]\033[m \033[1m Digite: {} --help para saber como funciona!\n".format(sys.argv[0]))
-#end
