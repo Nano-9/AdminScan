@@ -103,7 +103,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 5:
 										subdominios_deletados1.append(teste)
 						admin_search.close()
 						print("\n\n\033[1m >>>>>>\033[m \033[1;32mDETALHES DOS TESTES\033[m \033[1m<<<<<<\033[m\n")
-						print("\033[1mSubdomínios testados:\033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Subdomínios encontrados:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Subdomínios descartados:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes1),len(subdominios_encontrados1),len(subdominios_deletados1)))
+						print("\033[1mTestes realizados: \033[m \033[1m[\033[m \033[1;33m{}\033[m \033[1m]\033[m | \033[1m Páginas encontradas:\033[m \033[1m[\033[m \033[1;32m{}\033[m \033[1m]\033[m | \033[1m Páginas descartadas:\033[m \033[1m[\033[m \033[1;31m{}\033[m \033[1m]\033[m\n\n".format(len(subdominios_paraostestes1),len(subdominios_encontrados1),len(subdominios_deletados1)))
 					except:
 						pass
 
