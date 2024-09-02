@@ -18,7 +18,9 @@ SESSIONS = requests.Session()
 ENTER_USER = sys.argv
 verbose = False
 tecnologia = []
-servidor_web = [] 
+servidor_web = []
+diretorio_save = sys.argv[2].split("/")
+
 if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 	try:
 		if "--v" in sys.argv[5]:
@@ -35,7 +37,6 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 			if "--tipo" in ENTER_USER:
 				tipo_busca = sys.argv[4].lower()
 				if tipo_busca == "admin":
-					diretorio_save = sys.argv[2].split("/")
 					BanerAdm()
 					info = SESSIONS.get(sys.argv[2],timeout=5,verify=True,headers=way.headers)
 					for head,dados in info.headers.items():
@@ -98,19 +99,17 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mDiretório:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
 										if sys.platform == "win32":
 											os.makedirs(diretorio_save[2],exist_ok=True)
-											with open(str(os.getcwd())+str(r"\\"+diretorio_save[2])+r"\\Found.txt","a") as save1:
+											with open(str(os.getcwd())+str(r"\\"+diretorio_save[2])+r"\\"+"Diretórios-de-"+diretorio_save[2]+".txt","a") as save1:
 												save1.write("--------------------------------------\n")
-												save1.write("Site: {}\n".format(sys.argv[2]))
-												save1.write("Admin Page: {}\n".format(teste))
-												save1.write("--------------------------------------\n\n")
+												save1.write("URL ENCONTRADA:  {}\n".format(teste))
+												save1.write("--------------------------------------\n")
 												save1.close()
 										if sys.platform == "linux":
 											os.makedirs(diretorio_save[2],exist_ok=True)
-											with open(str(os.getcwd())+str("/"+diretorio_save[2])+"/Found.txt","a") as save2:
+											with open(str(os.getcwd())+str("/"+diretorio_save[2])+"/"+"Diretórios-de-"+diretorio_save[2]+".txt","a") as save2:
 												save2.write("--------------------------------------\n")
-												save2.write("Site: {}\n".format(sys.argv[2]))
-												save2.write("Admin Page: {}\n".format(teste))
-												save2.write("--------------------------------------\n\n")
+												save2.write("URL ENCONTRADA:  {}\n".format(teste))
+												save2.write("--------------------------------------\n")
 												save2.close()
 									else:
 										subdominios_deletados1.append(teste)
@@ -191,6 +190,20 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									if conectar_site2.status_code == 200:
 										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mSubdomínio:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
 										subdominios_encontrados.append(url3)
+										if sys.platform == "win32":
+											os.makedirs(diretorio_save[2],exist_ok=True)
+											with open(str(os.getcwd())+str(r"\\"+diretorio_save[2])+r"\\"+"Subdomios-de-"+diretorio_save[2]+".txt","a") as save1:
+												save1.write("--------------------------------------\n")
+												save1.write("URL ENCONTRADA:  {}\n".format(url3))
+												save1.write("--------------------------------------\n")
+												save1.close()
+										if sys.platform == "linux":
+											os.makedirs(diretorio_save[2],exist_ok=True)
+											with open(str(os.getcwd())+str("/"+diretorio_save[2])+"/"+"Subdomios-de-"+diretorio_save[2]+".txt","a") as save2:
+												save2.write("--------------------------------------\n")
+												save2.write("URL ENCONTRADA:  {}\n".format(url3))
+												save2.write("--------------------------------------\n")
+												save2.close()
 									else:
 										subdominios_deletados.append(url3)
 										if verbose == "sim":
@@ -246,3 +259,4 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 else:
 	BanerAdm()
 	print("\n\033[1m[\033[m\033[1;31m!\033[m\033[1m]\033[m \033[1m Digite: {} --help para saber como funciona!\n".format(sys.argv[0]))
+#end
