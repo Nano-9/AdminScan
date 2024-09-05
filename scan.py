@@ -88,8 +88,6 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									continue
 								except requests.exceptions.TooManyRedirects:
 									continue
-								except requests.exceptions.ReadTimeout:
-									continue
 								else:
 									if conectar_site.status_code == 200:
 										subdominios_encontrados1.append(teste)
@@ -189,8 +187,6 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									continue
 								except requests.exceptions.TooManyRedirects:
 									continue
-								except requests.exceptions.ReadTimeout:
-									continue
 								else:
 									if conectar_site2.status_code == 200:
 										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mSubdomínio:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
@@ -264,3 +260,4 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 else:
 	BanerAdm()
 	print("\n\033[1m[\033[m\033[1;31m!\033[m\033[1m]\033[m \033[1m Digite: {} --help para saber como funciona!\n".format(sys.argv[0]))
+#end
