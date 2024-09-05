@@ -19,6 +19,7 @@ ENTER_USER = sys.argv
 verbose = False
 tecnologia = []
 servidor_web = []
+sizes = 0
 
 if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 	try:
@@ -55,14 +56,21 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 						except:
 							pass
 
-					with open("admin.txt","rt") as count1:
-						for diretorio in count1:
-							subdominios_paraostestes1.append(diretorio.replace("\n",""))
-					count1.close()
+					if sys.platform == "linux":
+						wordlist_sizes = open("admin.txt","r").readlines()
+						sizes = len(wordlist_sizes)
+					else:
+						with open("admin.txt","rt") as count1:
+							for diretorio in count1:
+								subdominios_paraostestes1.append(diretorio.replace("\n",""))
+						count1.close()
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes1)))
+					if sys.platform == "linux":
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(sizes))
+					else:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes1)))
 					if verbose == "sim":
 						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mModo verbose:\033[m \033[1;32m{}\033[m\n".format(verbose.replace("sim","True")))
 					else:
@@ -77,7 +85,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 								except KeyboardInterrupt:
 									print("\n[*] Saindo...")
 									raise SystemExit
-								except requests.exceptions.ConnectionError:
+								except requests.exceptionsConnectionError:
 									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.SSLError:
