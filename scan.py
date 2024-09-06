@@ -96,18 +96,23 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									print("\n[*] Saindo...")
 									raise SystemExit
 								except requests.exceptionsConnectionError:
+									conectar_site.close()
 									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.SSLError:
+									conectar_site.close()
 									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.InvalidURL:
+									conectar_site.close()
 									subdominios_deletados1.append(teste)
 									continue
 								except requests.exceptions.TooManyRedirects:
+									conectar_site.close()
 									continue
 								else:
 									if conectar_site.status_code == 200:
+										conectar_site.close()
 										subdominios_encontrados1.append(teste)
 										if teste.endswith(".php"):
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mArquivo php:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
@@ -132,6 +137,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 												save2.write("--------------------------------------\n")
 												save2.close()
 									else:
+										conectar_site.close()
 										subdominios_deletados1.append(teste)
 										if "--v" in ENTER_USER:
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTested:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site.status_code,teste))
@@ -206,18 +212,23 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									print("\n[*] Saindo...")
 									raise SystemExit
 								except requests.exceptions.ConnectionError:
+									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.SSLError:
+									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.InvalidURL:
+									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.TooManyRedirects:
+									conectar_site2.close()
 									continue
 								else:
 									if conectar_site2.status_code == 200:
+										conectar_site2.close()
 										print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;32m{}\033[m\033[1m]\033[m \033[1;36mSubdomínio:\033[m \033[1m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
 										subdominios_encontrados.append(url3)
 										if sys.platform == "win32":
@@ -235,6 +246,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 												save2.write("--------------------------------------\n")
 												save2.close()
 									else:
+										conectar_site2.close()
 										subdominios_deletados.append(url3)
 										if verbose == "sim":
 											print("\033[m\033[1m[\033[m\033[1;36m{}\033[m\033[1m]\033[m \033[1m[\033[m\033[1;31m{}\033[m\033[1m]\033[m \033[1;31mTested:\033[m \033[3;2m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S"),conectar_site2.status_code,url3))
