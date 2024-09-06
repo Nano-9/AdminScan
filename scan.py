@@ -60,7 +60,7 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 							if tecnologia:
 								print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
 							else:
-								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mTECNOLOGIA:\033[m \033[1mNenhuma informação encontrada!\033[m")
+								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;31mNenhuma informação encontrada!\033[m")
 						except:
 							pass
 					if sys.platform == "linux":
