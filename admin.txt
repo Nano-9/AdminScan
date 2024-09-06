@@ -15,6 +15,15 @@ admin-site
 adm-site
 adm/site
 admin/site
+cadmin
+cadmin/site
+acadm/site
+cadm/site
+painel/adm
+painel/admin
+controle/admin
+controle/adm
+controle/login
 controle
 robots.txt
 sitemap.xml
