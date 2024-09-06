@@ -1,4 +1,6 @@
 admin
+xadmin
+xadmin/login.php
 administrador
 administrador/sistema
 administrator/system
