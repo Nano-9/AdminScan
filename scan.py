@@ -20,6 +20,8 @@ verbose = False
 tecnologia = []
 servidor_web = []
 sizes = 0
+numrs_dos_dias = datetime.date.today().weekday()
+dias_da_semana = ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado","Domingo"]
 
 if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 	try:
@@ -51,11 +53,16 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 							subdominios_encontrados1 = []
 							subdominios_deletados1 = []
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
-							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
-							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
+							if servidor_web:
+								print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
+							else:
+								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mSERVIDOR:\033[m \033[1;31mNenhuma informação encontrada!\033[m")
+							if tecnologia:
+								print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
+							else:
+								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mTECNOLOGIA:\033[m \033[1mNenhuma informação encontrada!\033[m")
 						except:
 							pass
-
 					if sys.platform == "linux":
 						wordlist_sizes = open("admin.txt","r").readlines()
 						sizes = len(wordlist_sizes)
@@ -65,8 +72,11 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 								subdominios_paraostestes1.append(diretorio.replace("\n",""))
 						count1.close()
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em:\033[m \033[1;35m{}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Página de Admin")))
+					if numrs_dos_dias < 5:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado na:\033[m \033[1;34m{}\033[m \033[1mas\033[m \033[1;34m{}\033[m".format(dias_da_semana[numrs_dos_dias],datetime.datetime.now().strftime("%H:%M:%S")))
+					else:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado no:\033[m \033[1;34m{}\033[m \033[1mas\033[m \033[1;34m{}\033[m".format(dias_da_semana[numrs_dos_dias],datetime.datetime.now().strftime("%H:%M:%S")))
+					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("admin","Páginas e Diretórios")))
 					if sys.platform == "linux":
 						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(sizes))
 					else:
@@ -156,12 +166,21 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 					if info2.status_code == 200:
 						try:
 							print("\n\n\033[1m>>>>>\033[m \033[1;32mSOBRE O SITE:\033[m \033[1m<<<<<\033[m\n")
-							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
-							print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
+							if servidor_web:
+								print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mSERVIDOR:\033[m \033[1;34m{}\033[m".format(servidor_web[0]))
+							else:
+								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mSERVIDOR:\033[m \033[1;31mNenhuma informação encontrada!\033[m")
+							if tecnologia:	
+								print("\033[1;32m[\033[m\033[1m*\033[m\033[1;32m]\033[m \033[1;32m[\033[m\033[1mINFO\033[m\033[1;32m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;34m{}\033[m".format(tecnologia[0]))
+							else:
+								print("\033[1;31m[\033[m\033[1m!\033[m\033[1;31m]\033[m \033[1;31m[\033[m\033[1;31mINFO\033[m\033[1;31m]\033[m \033[1mTECNOLOGIA:\033[m \033[1;31mNenhuma informação encontrada!\033[m")
 						except:
 							pass
 					print("\n\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m\033[1m\033[m \033[1mVarredura iniciada no alvo:\033[m \033[1;4;3;31m{}\033[m".format(sys.argv[2]))
-					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado em: {}\033[m".format(datetime.datetime.now().strftime("%H:%M:%S")))
+					if numrs_dos_dias < 5:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado na:\033[m \033[1;34m{}\033[m \033[1mas\033[m \033[1;34m{}\033[m".format(dias_da_semana[numrs_dos_dias],datetime.datetime.now().strftime("%H:%M:%S")))
+					else:
+						print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mIniciado no:\033[m \033[1;34m{}\033[m \033[1mas\033[m \033[1;34m{}\033[m".format(dias_da_semana[numrs_dos_dias],datetime.datetime.now().strftime("%H:%M:%S")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTipo de busca:\033[m \033[1;33m{}\033[m".format(sys.argv[4].replace("sublinks","subdomínios")))
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mEssa parte pode\033[m \033[1m(\033[m\033[1;31mdemorar\033[m\033[1m)\033[m\033[1m:\033[m")
 					print("\033[1;36m[\033[m\033[1m+\033[m\033[1;36m]\033[m \033[1mTamanho da Wordlist:\033[m \033[1;32m{}\033[m".format(len(subdominios_paraostestes)))
