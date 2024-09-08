@@ -212,19 +212,15 @@ if len(ENTER_USER) >= 2 and len(ENTER_USER) <= 6:
 									print("\n[*] Saindo...")
 									raise SystemExit
 								except requests.exceptions.ConnectionError:
-									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.SSLError:
-									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.InvalidURL:
-									conectar_site2.close()
 									subdominios_deletados.append(url3)
 									continue
 								except requests.exceptions.TooManyRedirects:
-									conectar_site2.close()
 									continue
 								else:
 									if conectar_site2.status_code == 200:
