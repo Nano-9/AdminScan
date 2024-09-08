@@ -1,3 +1,17 @@
+intramet
+documentacao
+desenvolvedor
+email
+pop
+login
+admin
+administracao
+portal
+ns1
+wordpress
+rh
+dev
+webmail
 mail
 ftp
 localhost
