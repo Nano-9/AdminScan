@@ -1,4 +1,7 @@
 admin
+index.php/auth/login
+page/login.php
+auth/login
 xadmin
 xadmin/login.php
 administrador
