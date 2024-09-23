@@ -3,6 +3,7 @@ wp-login
 wp-admin
 loginnew.php
 gestor
+adgestor
 dev
 desenv
 desenvolvedor
