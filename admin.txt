@@ -80,7 +80,7 @@ users/login
 user/login
 admin-dashboard
 adm/index.html
-asmin/index.html
+admin/index.html
 index.php/auth/login
 page/login.php
 auth/login
