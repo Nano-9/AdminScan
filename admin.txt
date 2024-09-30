@@ -1,4 +1,15 @@
 admin
+Login
+Login.php
+Login.asp
+Login.aspx
+Login.sesp
+Login.seam
+login.html
+Login.html
+auth
+sic/login.sesp
+admin/login.sesp
 wp-login
 wp-admin
 loginnew.php
