@@ -10,6 +10,14 @@ Login.html
 auth
 sic/login.sesp
 admin/login.sesp
+login.sesp
+htlogin
+saw.dll
+login.seam
+admin/index.asp
+iisadmpwd/achg.asp
+iisadmpwd
+admin/login.sesp
 wp-login
 wp-admin
 loginnew.php
